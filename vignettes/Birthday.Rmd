@@ -1,0 +1,133 @@
+---
+title: "Birthday"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Birthday}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MATH4753F25calebgaines)
+```
+
+# Part 1: Mathematical Derivation
+
+We want to compute the probability \( P(A) \) that **at least two** people in a group of size \( n \) share the same birthday.  
+Rather than calculating this probability directly, it is easier to calculate the **complementary probability**:
+
+$$
+P(A) = 1 - P(A^c),
+$$
+
+where \( P(A^c) \) is the probability that no two people share a birthday.
+
+---
+
+### Step 1: Total number of birthday assignments
+
+If there are \( n \) people and \( 365 \) possible birthdays (ignoring leap years), the total number of possible birthday assignments is
+
+$$
+365^n.
+$$
+
+---
+
+### Step 2: Number of assignments with all distinct birthdays
+
+For the first person, there are 365 possible birthdays.  
+For the second person, there are 364 (to avoid matching the first),  
+for the third 363, and so on.  
+
+Therefore, the number of ways to assign **distinct birthdays** to all \( n \) people is
+
+$$
+365 \times 364 \times 363 \times \cdots \times (365 - n + 1)
+= \frac{365!}{(365 - n)!}.
+$$
+
+---
+
+### Step 3: Probability that no two people share a birthday
+
+The probability of no shared birthdays is
+
+$$
+P(A^c) = 
+\frac{\text{# of assignments with all distinct birthdays}}
+{\text{total # of assignments}} 
+= \frac{\frac{365!}{(365 - n)!}}{365^n}
+= \frac{365 \times 364 \times \cdots \times (365 - n + 1)}{365^n}.
+$$
+
+---
+
+### Step 4: Probability that at least two people share a birthday
+
+Finally, the desired probability is the complement:
+
+$$
+P(A) = 1 - P(A^c) 
+= 1 - \frac{365 \times 364 \times \cdots \times (365 - n + 1)}{365^n}.
+$$
+
+This gives the exact probability that at least two people in a group of size \( n \) share a birthday.
+
+
+
+# Part 2: Reformulation using `lfactorial` and `lchoose`
+
+Start from the original probability expression:
+\[
+P(A^c)=\frac{365\times 364\times\cdots\times(365-n+1)}{365^n}
+=\frac{365!}{(365-n)!\,365^n}.
+\]
+
+Rewrite the numerator using the binomial coefficient and factorials:
+\[
+\frac{365!}{(365-n)!}
+= \binom{365}{n} n!.
+\]
+Thus
+\[
+P(A^c)=\frac{\binom{365}{n}\,n!}{365^n}.
+\]
+
+Take natural logs:
+Using \(\log\), \(\log n! = \mathrm{lfactorial}(n)\) and \(\log\binom{365}{n} = \mathrm{lchoose}(365,n)\), we get
+\[
+\log P(A^c) = \log\big(\binom{365}{n}\big) + \log(n!) - n\log(365)
+= \mathrm{lchoose}(365,n) + \mathrm{lfactorial}(n) - n\log(365).
+\]
+
+Therefore the probability is
+\[
+P(A) = 1 - P(A^c)
+= 1 - \exp\!\big( \mathrm{lchoose}(365,n) + \mathrm{lfactorial}(n) - n\log(365)\big).
+\]
+
+
+
+# Part 3: The Function
+
+```{r birthday}
+birthday
+```
+
+
+
+# Part 4: Does it work?
+
+```{r test}
+birthday(x = 20:25)
+```
+
+## It works!

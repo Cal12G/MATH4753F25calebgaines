@@ -1,8 +1,8 @@
 #' Mysum
 #'
-#' @param x
+#' @param x a vector of values
 #'
-#' @returns
+#' @returns the sum of a set of numbers
 #' @export
 #'
 #' @examples

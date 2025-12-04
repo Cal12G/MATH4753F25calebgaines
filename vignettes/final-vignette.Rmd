@@ -1,0 +1,164 @@
+---
+title: "final-vignette"
+name: "Caleb Gaines"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{final-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MATH4753F25calebgaines)
+```
+
+# The Package `MATH4753F25calebgaines`
+
+This package was created for the class Applied Statistical Methods (MATH 4753-001) with Professor Wayne Stewart. The package includes 13 functions, 1 test, 2 vignettes, and 1 dataset. This package will hopefully receive a good grade, as it follows the instructions that have been given throughout the class.
+
+# Working Code
+
+## `mynbin.R`
+
+### Description
+
+The function takes values y (total amount of trials), r (trials until success), and p (the probability of success) to calculate P(Y=y)
+
+### Proof it works
+
+```{r mynbin}
+y=20
+r=7
+p=.3
+mynbin(y,r,p)
+```
+
+### Full Documentation
+
+``` {r doc1}
+#' mynbin function
+#'
+#' @param y total trials until rth success
+#' @param r number of successes to be achieved
+#' @param p probability of success per trial
+#'
+#' @returns the probability P(Y=y)
+#' @export
+#'
+#' @examples
+#' # single value:
+#' mynbin(y=10,r=3,p=.4)
+#' # or vector:
+#' mynbin(y=3:12,r=3,p=.4)
+```
+
+## `mean_sd.R`
+
+### Description
+
+This function returns the mean and standard deviation of a numeric vector x.
+
+### Proof it works
+
+```{r mean_sd}
+x <- c(-2.73, 8.15, 0.42, -9.91, 5.56, -0.08, 3.14, -6.89, 7.02, -4.51, 9.27, -1.36, 6.48, -8.05, 1.99, -5.24, 4.76, -3.67, 2.88, -7.40)
+
+mean_sd(x)
+```
+
+### Full Documentation
+
+``` {r doc2}
+#' Calculate Mean and SD
+#'
+#' This function returns the mean and standard deviation of a numeric vector.
+#'
+#' @param x A numeric vector
+#' @importFrom stats sd
+#' @return A list with mean and sd
+#' @export
+```
+
+## `myfirstfunction.R`
+
+### Description
+
+This function takes a numeric vector x and returns both a list and a plot of x and y (y=x^2).
+
+### Proof it works
+
+Taking the same x vector as above
+
+```{r myfirstfunction}
+myfirstfunction(x)
+```
+
+### Full Documentation
+
+```{r doc3}
+#' My first function
+#'
+#' @param x A numeric vector
+#'
+#' @returns A list with components x and y, where y is the square of x
+#' @export
+#'
+#' @examples
+#' myfirstfunction(1:10)
+```
+
+## `birthday.R`
+
+### Description
+
+This function takes a vector of values x and calculates the probability for each value that a group of that size shares a birthday.
+
+### Proof it works
+
+```{r birthday}
+birthday(18:27)
+```
+
+### Full Documentation
+
+``` {r doc4}
+#' The Birthday Function
+#'
+#' @param x a vector of values
+#'
+#' @returns probability for students to share the same birthday
+#' @export
+#'
+#' @examples birthday(20:24)
+```
+
+# A dataset in the package
+
+```{r fire}
+fire
+```
+
+## The Documentation
+
+```{r firedoc}
+#' Fire Damage and Distance Data
+#'
+#' Data of fire damage and distance from a given file
+#'
+#' @format ## `fire`
+#' A data frame with 15 rows and 2 columns:
+#' \describe{
+#'   \item{DISTANCE}{Distance from a fire}
+#'   \item{DAMAGE}{Damage caused by fire}
+#' }
+#' @source <FIREDAM.csv from a given file>
+```
+
+#### Hopefully this is all good!

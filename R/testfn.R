@@ -1,6 +1,6 @@
 #' Test fn
 #'
-#' @param x
+#' @param x a vector of values
 #'
 #' @returns A list with x and y
 #' @export

@@ -7,7 +7,7 @@
 testfn(x)
 }
 \arguments{
-\item{x}{}
+\item{x}{a vector of values}
 }
 \value{
 A list with x and y

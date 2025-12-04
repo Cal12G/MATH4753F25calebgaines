@@ -7,7 +7,10 @@
 mysum(x)
 }
 \arguments{
-\item{x}{}
+\item{x}{a vector of values}
+}
+\value{
+the sum of a set of numbers
 }
 \description{
 Mysum
